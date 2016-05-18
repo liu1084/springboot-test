@@ -20,14 +20,7 @@ public class UserController {
 
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String world() {
-		return "world";
-	}
-
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	public String index(Model model) {
-		model.addAttribute(new User());
-		model.addAttribute("submit", "Submit");
-		return "user/index";
+		return "index";
 	}
 
 	@RequestMapping(value = "/user/id/{id}")
@@ -37,10 +30,15 @@ public class UserController {
 		return userService.byId(id);
 	}
 
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	public String index(Model model) {
+		model.addAttribute("user", new User());
+		return "index";
+	}
+
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public String create(@ModelAttribute User user, Model model){
-		model.addAttribute(model);
-		model.addAttribute("url", "/user");
-		return "user/result";
+		model.addAttribute("user", user);
+		return "result";
 	}
 }

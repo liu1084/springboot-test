@@ -9,9 +9,16 @@
 
     <mvc:resources mapping="/static/**" location="classpath:/static/"/>
     <mvc:annotation-driven/>
-       <bean id="templateResolver"
-             class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-              <property name="prefix" value="/WEB-INF/" />
-              <property name="templateMode" value="HTML5" />
-       </bean>
+
+    <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver" />
+    </bean>
+
+    <bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+        <property name="prefix" value="/templates"/>
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+        <property name="cacheable" value="false"/>
+    </bean>
+
 </beans>
